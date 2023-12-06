@@ -19,7 +19,7 @@ app.post('/api/v1/success', async (req, res) => {
 
     // pull creds from request body (temp workaround due to cors issue)
     const body = JSON.stringify(req.body);
-    const auth = body.substring(body.indexOf(`Basic`), body.indexOf(`\\"}`))
+    const auth = body.substring(body.indexOf(`Basic`), body.indexOf(`\"}`))
 
     // return bad request if no request body
     if (!Object.keys(req.body).length) {
@@ -35,8 +35,9 @@ app.post('/api/v1/success', async (req, res) => {
             'Authorization': auth,
             'Content-Type': 'application/json'
         },
-        body: JSON.parse(body),
+        body,
     }
+
     try {
         const response = await fetch(host, options);
         console.log(`response: ${JSON.stringify(response.status)} - ${JSON.stringify(response)}`);

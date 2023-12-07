@@ -13,17 +13,12 @@ const port = process.env.PORT || 3000;
 app.post('/api/v1/success', async (req, res) => {
     const host = `${process.env.TIGER_TRANSFORMER_FEEDBACK_API_HOST}/api/v1/success`;
     
-    // pull creds from env
-    // const creds = `${process.env.TIGER_TRANSFORMER_FEEDBACK_API_USER}:${process.env.TIGER_TRANSFORMER_FEEDBACK_API_PASSWORD}`
-    // const auth = `Basic ${Buffer.from(creds).toString('base64')}`;
-
     // pull creds from request body (temp workaround due to cors issue)
-    // const body = JSON.stringify(req.body);
-    const body = req.body;
+    let body = req.body;
     const auth = body.substring(body.indexOf(`Basic`), body.indexOf(`\"}`))
 
-    // TODO: create new body to remove auth from payload
-    // const newBody = JSON.stringify(req.body).replace(auth, '');
+    // remove auth from payload to api
+    body = body.replace(`, "authorization": "${auth}"`, '');
 
     // return bad request if no request body
     if (!Object.keys(req.body).length) {

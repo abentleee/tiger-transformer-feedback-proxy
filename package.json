@@ -10,6 +10,7 @@
   "type": "module",
   "scripts": {
     "start:dev": "NODE_ENV=dev node src/main.js",
+    "start": "node src/main.js",
     "deploy": "git push heroku main"
   }
 }

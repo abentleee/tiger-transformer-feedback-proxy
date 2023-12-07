@@ -9,6 +9,7 @@
   },
   "type": "module",
   "scripts": {
-    "start": "node src/main.js"
+    "start": "node src/main.js",
+    "publish": "git push heroku main"
   }
 }

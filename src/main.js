@@ -18,7 +18,8 @@ app.post('/api/v1/success', async (req, res) => {
     // const auth = `Basic ${Buffer.from(creds).toString('base64')}`;
 
     // pull creds from request body (temp workaround due to cors issue)
-    const body = JSON.stringify(req.body);
+    // const body = JSON.stringify(req.body);
+    const body = req.body;
     const auth = body.substring(body.indexOf(`Basic`), body.indexOf(`\"}`))
 
     // TODO: create new body to remove auth from payload

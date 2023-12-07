@@ -21,6 +21,9 @@ app.post('/api/v1/success', async (req, res) => {
     const body = JSON.stringify(req.body);
     const auth = body.substring(body.indexOf(`Basic`), body.indexOf(`\"}`))
 
+    // TODO: create new body to remove auth from payload
+    // const newBody = JSON.stringify(req.body).replace(auth, '');
+
     // return bad request if no request body
     if (!Object.keys(req.body).length) {
         console.error(`no request body found, returning 400`);
@@ -37,6 +40,8 @@ app.post('/api/v1/success', async (req, res) => {
         },
         body,
     }
+
+    console.log(`host: ${host}, options: ${JSON.stringify(options)}`);
 
     try {
         const response = await fetch(host, options);
